@@ -2,6 +2,12 @@
 
 Aplikacja webowa, która rozpoznaje, czy na zdjęciu jest **kot** czy **pies**. Użytkownik wybiera zdjęcie w przeglądarce, a backend klasyfikuje je wytrenowaną siecią konwolucyjną (TensorFlow/Keras) i zwraca wynik.
 
+## Demo
+
+| Kot | Pies |
+|-----|------|
+| ![Rozpoznany kot](assets/cat.png) | ![Rozpoznany pies](assets/dog.png) |
+
 ## Struktura projektu
 
 ```
@@ -115,16 +121,3 @@ Sekwencyjna sieć CNN zapisana w `backend/catvsdogs_model.keras`:
 - **CORS:** lista dozwolonych adresów jest w `origins` w `backend/main.py`. Domyślnie zawiera `http://localhost:5173` (serwer deweloperski Vite).
 - **Adres API we frontendzie:** zapisany na sztywno w `dogvscat/src/App.jsx` jako `http://127.0.0.1:8000/animal`.
 
-## Rozwiązywanie problemów
-
-**Po wybraniu zdjęcia nic się nie pojawia.**
-Najczęstszą przyczyną jest stara instancja serwera, która nadal zajmuje port 8000 i serwuje nieaktualny kod. Zamknij wszystkie terminale z `fastapi dev` (Ctrl+C) i uruchom backend ponownie. W systemie Windows możesz sprawdzić, który proces zajmuje port:
-
-```powershell
-Get-NetTCPConnection -LocalPort 8000 -State Listen | Select-Object OwningProcess
-```
-
-Sprawdź też konsolę przeglądarki (F12): pokaże ewentualne błędy CORS albo błędy połączenia.
-
-**`OSError` / brak pliku modelu przy starcie.**
-Plik `catvsdogs_model.keras` musi leżeć w katalogu `backend/`, obok `main.py`.
