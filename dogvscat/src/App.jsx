@@ -8,6 +8,7 @@ function App() {
 
   const [selectedFile, setSelectedFile] = useState(null)
   const [url, setUrl] = useState(null)
+  const [className, setClassname] = useState(null)
 
 
 
@@ -36,18 +37,20 @@ function App() {
       body: formdata
     })
 
-    const data = await response.text()
+    const data = await response.json()
     console.log(data)
+    setClassname(data.class)
   }
 
   return (
     <>
       <div className='mainPanel'>
         <p>Wprowadź zwierzaka</p>
-        <input type='file' accept='image/*' onChange = {handleImageChange} />
         <div className='imagePanel'>
           {url && <img src={url} className="selectedImg"></img>}
         </div>
+        {className && <p>To jest {className}</p>}
+        <input type='file' accept='image/*' onChange = {handleImageChange} />
       </div>
     </>
   )
