@@ -105,23 +105,3 @@ curl -F "file=@kot.jpg" http://127.0.0.1:8000/animal
 ## Model
 
 Sekwencyjna sieć CNN zapisana w `backend/catvsdogs_model.keras`:
-
-| Warstwa                    | Wyjście            |
-|----------------------------|--------------------|
-| Rescaling (1/255)          | 180 × 180 × 3      |
-| Conv2D 16 + MaxPooling2D   | 90 × 90 × 16       |
-| Conv2D 32 + MaxPooling2D   | 45 × 45 × 32       |
-| Conv2D 64 + MaxPooling2D   | 22 × 22 × 64       |
-| Flatten                    | 30 976             |
-| Dense 128                  | 128                |
-| Dense 2 (logity)           | 2                  |
-
-- Normalizacja pikseli jest wbudowana w model (warstwa `Rescaling`), więc backend przekazuje surowe wartości 0–255.
-- Model trenowano z funkcją straty `SparseCategoricalCrossentropy(from_logits=True)`, więc ostatnia warstwa nie ma aktywacji. `softmax` nakłada backend.
-- Kolejność klas: `0 = Kot`, `1 = Pies` (alfabetyczna kolejność folderów z `image_dataset_from_directory`). Jeśli wyniki są odwrócone, zmień kolejność listy `class_names` w `backend/main.py`.
-
-## Konfiguracja
-
-- **CORS:** lista dozwolonych adresów jest w `origins` w `backend/main.py`. Domyślnie zawiera `http://localhost:5173` (serwer deweloperski Vite).
-- **Adres API we frontendzie:** zapisany na sztywno w `dogvscat/src/App.jsx` jako `http://127.0.0.1:8000/animal`.
-
