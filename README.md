@@ -4,9 +4,13 @@ Aplikacja webowa, która rozpoznaje, czy na zdjęciu jest **kot** czy **pies**. 
 
 ## Demo
 
-| Kot | Pies |
-|-----|------|
-| ![Rozpoznany kot](assets/cat.png) | ![Rozpoznany pies](assets/dog.png) |
+### Kot
+
+![Rozpoznany kot](assets/cat.png)
+
+### Pies
+
+![Rozpoznany pies](assets/dog.png)
 
 ## Struktura projektu
 
